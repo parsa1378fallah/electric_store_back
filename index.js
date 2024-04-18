@@ -14,7 +14,7 @@ app.use(express.static("public"));
 app.use("/api", Router);
 
 const PORT = process.env.PORT || 3000;
-sequelize.sync();
+await sequelize.sync();
 app.listen(PORT, () => {
   console.log(`listening to port ${PORT}`);
 });

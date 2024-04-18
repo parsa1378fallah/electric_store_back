@@ -1,10 +1,10 @@
 import autoBind from "auto-bind";
-import Users from "./models/users.js";
+import User from "./models/users.js";
 
 const controller = class {
   constructor() {
     autoBind(this);
-    this.Users = Users;
+    this.User = User;
   }
 
   response({ res, message, code = 200, data = {} }) {
