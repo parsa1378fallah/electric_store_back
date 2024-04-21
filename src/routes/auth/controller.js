@@ -1,4 +1,3 @@
-import { where } from "@sequelize/core";
 import controller from "../../controller.js";
 export default new (class extends controller {
   async register(req, res) {
@@ -19,18 +18,30 @@ export default new (class extends controller {
   }
   async login(req, res) {
     const { email, password } = req.body;
-    const user = await this.User.findOne({ where: { email: email } });
-
-    if (user.dataValues.passwor != password)
+    const user = await this.User.findOne({
+      where: {
+        email: email,
+      },
+    });
+    console.log(user);
+    if (!user)
       return this.response({
         status: 400,
-        message: "عملیات ناموفق",
+        message: "برای ورورد ابتدا ثبت نام کنید",
+        res,
+        data: {},
+      });
+
+    if (user.dataValues.password != password)
+      return this.response({
+        status: 400,
+        message: "ایمیل یا رمز عبور اشتباه است",
         res,
         data: user,
       });
     return this.response({
-      status: 400,
-      message: "عملیات موفق",
+      status: 200,
+      message: "کاربر گرامی با موفقیت وارد شدید",
       res,
       data: user,
     });
