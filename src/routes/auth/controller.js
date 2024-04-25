@@ -32,7 +32,6 @@ export default new (class extends controller {
         email: email,
       },
     });
-    console.log(user);
     if (!user)
       return this.response({
         code: 400,

@@ -32,8 +32,8 @@ const User = sequelize.define("User", {
     allowNull: true,
   },
   level: {
-    type: DataTypes.ENUM("beginner", "intermediate", "advanced"),
-    allowNull: true,
+    type: DataTypes.ENUM("1", "2"),
+    defaultValue: "2",
   },
   profileImage: {
     type: DataTypes.STRING,

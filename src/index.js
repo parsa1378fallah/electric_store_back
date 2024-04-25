@@ -4,5 +4,5 @@ import userRouter from "./routes/users/index.js";
 const router = express.Router();
 
 router.use("/auth", authRouter);
-router.use("/users", userRouter);
+router.use("/user", userRouter);
 export default router;
