@@ -3,10 +3,9 @@ import controller from "../../controller.js";
 export default new (class extends controller {
   async getUsers(req, res) {
     const users = await this.User.findAll();
-    console.log(users);
     this.response({
       code: 200,
-      message: "this a forward step",
+      message: "تمامی کاربران سایت ",
       res,
       data: users,
     });
@@ -14,7 +13,7 @@ export default new (class extends controller {
   async editUser(req, res) {
     const { userId } = req.params;
     const user = await this.User.findByPk(userId);
-    const { firstName, lastName, address, password, birthDate, gender } =
+    const { firstName, lastName, address, password, birthDate, gender, level } =
       req.body;
     if (!user)
       return this.response({
@@ -23,14 +22,14 @@ export default new (class extends controller {
         res,
         data: {},
       });
-    user.firstName = firstName;
-    user.lastName = lastName;
-    user.address = address;
-    user.password = password;
-    user.birthDate = birthDate;
-    user.gender = gender;
+    if (firstName !== undefined) user.firstName = firstName;
+    if (lastName !== undefined) user.lastName = lastName;
+    if (address !== undefined) user.address = address;
+    if (password !== undefined) user.password = password;
+    if (birthDate !== undefined) user.birthDate = birthDate;
+    if (gender !== undefined) user.gender = gender;
+    if (level !== undefined) user.level = level;
     const editedUser = await user.save();
-    console.log(editedUser);
     return this.response({
       code: 200,
       message: "اطلاعات کاربر به روز رسانی شد",
