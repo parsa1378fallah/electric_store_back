@@ -31,7 +31,7 @@ export default new (class extends controller {
   }
   async deleteCategory(req, res) {
     const { categoryId } = req.params;
-    const category = await this.Category.destroy({
+    const category = await this.Category.findOne({
       where: { categoryId: categoryId },
     });
     if (!category)
@@ -41,6 +41,7 @@ export default new (class extends controller {
         message: "این دسته بندی وجود ندارد",
         data: {},
       });
+    await this.Category.destroy({ where: { categoryId: categoryId } });
     return this.response({
       code: 200,
       res,
