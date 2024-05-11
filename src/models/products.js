@@ -8,50 +8,50 @@ const Product = sequelize.define("Product", {
     autoIncrement: true,
     allowNull: false,
   },
-  name: {
+  productName: {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  price: {
+  productPrice: {
     type: DataTypes.FLOAT,
     allowNull: false,
   },
-  description: {
+  productDescription: {
     type: DataTypes.TEXT,
     allowNull: false,
   },
-  qty: {
+  productQty: {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
-  manufacturerId: {
+  productManufacturerId: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
   },
   brandId: {
     type: DataTypes.INTEGER,
-    allowNull: false,
+    allowNull: true,
   },
-  manufactureDate: {
+  productManufactureDate: {
     type: DataTypes.DATE,
-    allowNull: false,
+    allowNull: true,
   },
-  rating: {
+  productRating: {
     type: DataTypes.FLOAT,
-    allowNull: false,
+    allowNull: true,
     defaultValue: 0,
   },
-  isActive: {
+  productIsActive: {
     type: DataTypes.BOOLEAN,
     allowNull: false,
   },
-  imageUrl: {
+  productImageUrl: {
     type: DataTypes.STRING,
     allowNull: true,
   },
   categoryId: {
     type: DataTypes.INTEGER,
-    allowNull: false,
+    allowNull: true,
   },
 });
 export default Product;

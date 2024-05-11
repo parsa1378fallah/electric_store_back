@@ -17,6 +17,17 @@ const categoryImageStorage = multer.diskStorage({
   },
 });
 
+const productImageStorage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "public/product");
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + path.extname(file.originalname));
+  },
+});
+
 export const uploadProfileImage = multer({ storage: profileImageStorage });
 
 export const uploadCategoryImage = multer({ storage: categoryImageStorage });
+
+export const uploadProductImage = multer({ storage: productImageStorage });

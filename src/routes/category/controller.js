@@ -2,10 +2,10 @@ import controller from "../../controller.js";
 export default new (class extends controller {
   async addCategory(req, res) {
     const { categoryName } = req.body;
-    let category = this.Category.findOne({
+    let category = await this.Category.findOne({
       where: { categoryName: categoryName },
     });
-    if (!category)
+    if (category)
       return this.response({
         code: 400,
         message: "این دسته بندی قبلا ثبت شده است",
