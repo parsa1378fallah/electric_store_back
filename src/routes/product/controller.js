@@ -2,7 +2,6 @@ import controller from "../../controller.js";
 export default new (class extends controller {
   async addProduct(req, res) {
     const { productName } = req.body;
-    console.log(productName);
     let product = await this.Product.findOne({
       where: { productName: productName },
     });

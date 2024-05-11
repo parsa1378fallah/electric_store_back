@@ -5,11 +5,10 @@ export default new (class extends controller {
     let user = await this.User.findOne({ where: { userId: userId } });
     user.profileImage = `http://localhost:3000/profile/${req.file.filename}`;
     user = await user.save();
-    console.log(user);
     return this.response({
       code: 200,
       res,
-      message: "این یک تست است",
+      message: "عکس پروفایل شما آپلود شد .",
       data: {
         filename: req.file.filename,
         url: `http://localhost:3000/profile/${req.file.filename}`,
@@ -24,11 +23,10 @@ export default new (class extends controller {
     });
     category.imageUrl = `http://localhost:3000/category/${req.file.filename}`;
     category = await category.save();
-    console.log(categoryId);
     return this.response({
       code: 200,
       res,
-      message: "این یک تست است",
+      message: "عکس دسته بندی آپلود شد",
       data: {
         filename: req.file.filename,
         url: `http://localhost:3000/category/${req.file.filename}`,
@@ -46,7 +44,7 @@ export default new (class extends controller {
     return this.response({
       code: 200,
       res,
-      message: "عکس محصول آپلود شد",
+      message: "عکس محصول شما آپلود شد",
       data: {
         filename: req.file.filename,
         url: `http://localhost:3000/product/${req.file.filename}`,

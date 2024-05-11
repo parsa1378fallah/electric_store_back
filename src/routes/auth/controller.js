@@ -39,7 +39,6 @@ export default new (class extends controller {
         res,
         data: {},
       });
-    console.log(user.dataValues.password);
     if (user.dataValues.password != password)
       return this.response({
         code: 400,
