@@ -12,7 +12,11 @@ export default new (class extends controller {
         res,
         data: {},
       });
-    product = await this.Product.create(req.body);
+    await this.Product.create(req.body);
+    product = this.Product.findOne(
+      { where: { productName: productName } },
+      { include: this.Category }
+    );
     this.response({
       code: 200,
       message: "محصول جدید ثبت شد",
@@ -21,14 +25,31 @@ export default new (class extends controller {
     });
   }
   async getProducts(req, res) {
-    const products = await this.Product.findAll();
-    this.response({
+    let products = null;
+    const { categoryId } = req.query;
+    console.log(categoryId);
+    if (categoryId) {
+      products = await this.Product.findAll({
+        where: { categoryId: categoryId },
+        include: this.Category,
+      });
+      console.log(products);
+      return this.response({
+        code: 200,
+        message: "محصولات مربوط به دسته‌بندی مورد نظر",
+        res,
+        data: products,
+      });
+    }
+    products = await this.Product.findAll({ include: this.Category });
+    return this.response({
       code: 200,
-      message: "تمامی محصول های موجود",
+      message: "تمامی محصول‌های موجود",
       res,
       data: products,
     });
   }
+
   async deleteProduct(req, res) {
     const { productId } = req.params;
     const product = await this.Product.findOne({
@@ -61,6 +82,9 @@ export default new (class extends controller {
       });
 
     product = await product.update(req.body);
+    product = await this.Product.findByPk(productId, {
+      include: this.Category,
+    });
     return this.response({
       code: 200,
       res,
