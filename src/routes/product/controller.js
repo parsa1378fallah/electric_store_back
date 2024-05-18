@@ -33,7 +33,7 @@ export default new (class extends controller {
         where: { categoryId: categoryId },
         include: this.Category,
       });
-      console.log(products);
+
       return this.response({
         code: 200,
         message: "محصولات مربوط به دسته‌بندی مورد نظر",
