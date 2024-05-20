@@ -13,10 +13,10 @@ export default new (class extends controller {
         data: {},
       });
     await this.Product.create(req.body);
-    product = this.Product.findOne(
-      { where: { productName: productName } },
-      { include: this.Category }
-    );
+    product = await this.Product.findOne({
+      where: { productName: productName },
+      include: [{ model: this.Category }],
+    });
     this.response({
       code: 200,
       message: "محصول جدید ثبت شد",
@@ -27,7 +27,6 @@ export default new (class extends controller {
   async getProducts(req, res) {
     let products = null;
     const { categoryId } = req.query;
-    console.log(categoryId);
     if (categoryId) {
       products = await this.Product.findAll({
         where: { categoryId: categoryId },

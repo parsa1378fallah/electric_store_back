@@ -38,6 +38,7 @@ export default new (class extends controller {
     const { productId } = req.params;
     let product = await this.Product.findOne({
       where: { productId: productId },
+      include: [{ model: this.Category }],
     });
     product.productImageUrl = `http://localhost:3000/product/${req.file.filename}`;
     product = await product.save();
