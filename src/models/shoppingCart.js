@@ -2,7 +2,7 @@ import sequelize from "../../utiles/db.js";
 import { DataTypes } from "@sequelize/core";
 
 const ShoppingCart = sequelize.define("ShoppingCart", {
-  cartId: {
+  shoppingCartId: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true,
@@ -18,9 +18,9 @@ const ShoppingCart = sequelize.define("ShoppingCart", {
     allowNull: false,
   },
   status: {
-    type: DataTypes.STRING,
+    type: DataTypes.BOOLEAN,
     allowNull: false,
-    defaultValue: "1",
+    defaultValue: true,
   },
 });
 

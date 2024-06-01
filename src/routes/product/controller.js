@@ -26,7 +26,21 @@ export default new (class extends controller {
   }
   async getProducts(req, res) {
     let products = null;
-    const { categoryId } = req.query;
+    const { categoryId, productId } = req.query;
+    if (productId) {
+      console.log(productId);
+      products = await this.Product.findOne({
+        where: { productId: productId },
+        include: this.Category,
+      });
+
+      return this.response({
+        code: 200,
+        message: "محصول مربوطه یافت شد",
+        res,
+        data: products,
+      });
+    }
     if (categoryId) {
       products = await this.Product.findAll({
         where: { categoryId: categoryId },
@@ -56,7 +70,7 @@ export default new (class extends controller {
     });
     if (!product)
       return this.response({
-        code: "404",
+        code: 404,
         res,
         message: "این محصول وجود ندارد",
         data: {},
